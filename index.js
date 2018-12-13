@@ -42,7 +42,7 @@ var server = function(req,res){
   var headers = req.headers;
 
   // Get the payload, if any
-  var decoder = new StringDecoder('utf-8'); // create decoder
+  var decoder = new stringDecoder('utf-8'); // create decoder
   var buffer = ''; // instantiate buffer to store data
   req.on('data', function(data){
     buffer += decoder.write(data);
@@ -52,7 +52,7 @@ var server = function(req,res){
     buffer += decoder.end();
 
     // Choose the handler this request should go to. If one is not found, choose the notFound handler
-    var chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router.[trimmedPath] : router.notFound;
+    var chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : router.notFound;
 
     // Construct the data object to send to the handler
     var data = {
@@ -76,7 +76,7 @@ var server = function(req,res){
       var payloadString = JSON.stringify(payload);
 
       // Return the response
-      res.setHeaders('Content-Type','application/json');
+      res.setHeader('Content-Type','application/json');
       res.writeHead(statusCode);
       res.end(payloadString)
 
@@ -89,12 +89,12 @@ var server = function(req,res){
 var handlers = {};
 
 // hello handler
-handler.hello = function(data,callback){
+handlers.hello = function(data,callback){
   callback(200,{"Welcome message" : "Hello you!"}) // callback a status code and an object with welcome message
 };
 
 // Not found handler
-handler.notFound = function(data,callback){
+handlers.notFound = function(data,callback){
   callback(404);
 };
 
