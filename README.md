@@ -26,4 +26,6 @@ NODE_ENV=production node index.js
 
 The next message will appear : ‘The server is listening on port 3000’
 
+If having trouble with "**?**" in a curl request on your terminal, and you are using zsh, add **unsetopt nomatch** in the zsh config file.
+
 When receiving an HTTP request \(e.g. via Postman\), you should see the following message displayed on your terminal : **Returning this response: 200 {“Welcome message” : “Hello you!”}**
