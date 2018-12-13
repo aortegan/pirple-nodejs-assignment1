@@ -22,6 +22,22 @@ httpServer.listen(config.httpPort,function(){
   console.log("Server listening on port " + config.httpPort + ", in " + config.envName + " mode");
 });
 
+// Create https options object to encrypt/decrypt
+var httpsOptions = {
+  'key' : fs.readFileSync('./https/key.pem'), // read key file generated with openssl
+  'cert' : fs.readFileSync('./https/cert.pem')  // read certificate file generated with openssl
+};
+
+// Instantiate HTTPS server
+var httpsServer = https.createServer(httpsOptions,function(req,res){
+  server(req,res);
+});
+
+// Start the HTTPS server
+httpsServer.listen(config.httpsPort,function(){
+	console.log('Server listening on port ' + config.httpsPort +', in ' + config.envName + ' mode');
+});
+
 // Logic for HTTP server
 var server = function(req,res){
 
