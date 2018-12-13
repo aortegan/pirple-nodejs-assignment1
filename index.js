@@ -4,10 +4,25 @@
  */
 
 // Dependencies
+const http = require('http');
+const https = require('https');
+const url = require('url');
+const stringDecoder = require('string_decoder').StringDecoder;
+const config = require('./config');
+const fs = require('fs');
+// import http from 'http';
+// import https from 'https';
+// import url from 'url';
+// import stringDecoder from 'string_decoder'.StringDecoder;
+// import config from './config';
+// import fs from 'fs';
+
 
 // Instantiate HTTP server
+const httpServer = ;
 
 // Start HTTP server
+httpServer
 
 // Logic for HTTP server
 

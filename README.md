@@ -17,7 +17,11 @@ Create a simple "Hello World" API. Meaning:
 In the terminal, cd to the project's folder and run the following command
 
 ```
+// defaut environment
 node index.js
+
+// or choose environment
+NODE_ENV=production node index.js
 ```
 
 The next message will appear : ‘The server is listening on port 3000’
