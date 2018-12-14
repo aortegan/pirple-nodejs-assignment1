@@ -30,12 +30,8 @@ The next message will appear : ‘The server is listening on port 3000’
 
 To send a request, use ports 3000 or 8080 for HTTPS, and 3001 or 8081 for HTTPS.
 
-When receiving an HTTP request \(e.g. via Postman\), you should see the following message displayed on your terminal : **Returning this response: 200 {“Welcome message” : “Hello!”}**
+When receiving an HTTP request \(e.g. via Postman\), you should see the following message displayed on your terminal : **Returning this response: 200 {“Welcome message” : “Hello you!”}**
 
-```
-localhost:3000/hello?country=France
-// {"Welcome message" : "bonjour!"}
-```
 
 ### Problems with ZSH
 
