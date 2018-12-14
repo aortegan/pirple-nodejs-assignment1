@@ -4,42 +4,42 @@
  */
 
 // Dependencies
-var http = require('http');
-var https = require('https');
-var url = require('url');
-var stringDecoder = require('string_decoder').StringDecoder;
-var config = require('./config');
-var fs = require('fs');
+const http = require('http');
+const https = require('https');
+const url = require('url');
+const stringDecoder = require('string_decoder').StringDecoder;
+const config = require('./config');
+const fs = require('fs');
 
 // Instantiate HTTP server
-var httpServer = http.createServer(function(req,res){
+const httpServer = http.createServer((req,res) => {
   // Call function with server Logic
   server(req,res);
 });
 
 // Start HTTP server
-httpServer.listen(config.httpPort,function(){
+httpServer.listen(config.httpPort,() => {
   console.log("Server listening on port " + config.httpPort + ", in " + config.envName + " mode");
 });
 
 // Create https options object to encrypt/decrypt
-var httpsOptions = {
+const httpsOptions = {
   'key' : fs.readFileSync('./https/key.pem'), // read key file generated with openssl
   'cert' : fs.readFileSync('./https/cert.pem')  // read certificate file generated with openssl
 };
 
 // Instantiate HTTPS server
-var httpsServer = https.createServer(httpsOptions,function(req,res){
+const httpsServer = https.createServer(httpsOptions,(req,res) => {
   server(req,res);
 });
 
 // Start the HTTPS server
-httpsServer.listen(config.httpsPort,function(){
+httpsServer.listen(config.httpsPort,() => {
 	console.log('Server listening on port ' + config.httpsPort +', in ' + config.envName + ' mode');
 });
 
 // Logic for HTTP server
-var server = function(req,res){
+const server = (req,res) => {
 
   // Get the url and parse it
   var parsedUrl = url.parse(req.url,true);
@@ -60,11 +60,11 @@ var server = function(req,res){
   // Get the payload, if any
   var decoder = new stringDecoder('utf-8'); // create decoder
   var buffer = ''; // instantiate buffer to store data
-  req.on('data', function(data){
+  req.on('data', (data) => {
     buffer += decoder.write(data);
   });
 
-  req.on('end', function(){
+  req.on('end', () => {
     buffer += decoder.end();
 
     // Choose the handler this request should go to. If one is not found, choose the notFound handler
@@ -80,7 +80,7 @@ var server = function(req,res){
 		};
 
     // Route the request to the handler specified in the router
-    chosenHandler(data,function(statusCode,payload){
+    chosenHandler(data,(statusCode,payload) => {
 
       // Use the status code called back by the handler, or default to 200
       statusCode = typeof(statusCode) == 'number' ? statusCode : 200;
@@ -102,19 +102,19 @@ var server = function(req,res){
 };
 
 // Define the handlers
-var handlers = {};
+const handlers = {};
 
 // hello handler
-handlers.hello = function(data,callback){
+handlers.hello = (data,callback) => {
   callback(200,{"Welcome message" : 'Hello you!'}) // callback a status code and an object with welcome message
 };
 
 // Not found handler
-handlers.notFound = function(data,callback){
+handlers.notFound = (data,callback) => {
   callback(404);
 };
 
 // Define request router
-var router = {
+const router = {
 	'hello' : handlers.hello,
 };
