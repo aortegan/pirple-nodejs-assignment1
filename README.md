@@ -32,8 +32,6 @@ To send a request, use ports 3000 or 8080 for HTTPS, and 3001 or 8081 for HTTPS.
 
 When receiving an HTTP request \(e.g. via Postman\), you should see the following message displayed on your terminal : **Returning this response: 200 {“Welcome message” : “Hello!”}**
 
-Adding your country as a parameter in the url will modify the welcome message to your own language! :\)
-
 ```
 localhost:3000/hello?country=France
 // {"Welcome message" : "bonjour!"}

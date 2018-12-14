@@ -10,7 +10,6 @@ var url = require('url');
 var stringDecoder = require('string_decoder').StringDecoder;
 var config = require('./config');
 var fs = require('fs');
-var hello = require('./hello.json');
 
 // Instantiate HTTP server
 var httpServer = http.createServer(function(req,res){
@@ -105,14 +104,9 @@ var server = function(req,res){
 // Define the handlers
 var handlers = {};
 
-// Define Welcome Message
-var welcomeMessage = '';
-
 // hello handler
 handlers.hello = function(data,callback){
-  var country = typeof(hello[data.queryStringObject['country']]) == 'string' ? data.queryStringObject['country'] : 'Spain';
-  welcomeMessage = hello[country] + '!';
-  callback(200,{"Welcome message" : welcomeMessage}) // callback a status code and an object with welcome message
+  callback(200,{"Welcome message" : 'Hello you!'}) // callback a status code and an object with welcome message
 };
 
 // Not found handler
